@@ -1,0 +1,850 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Too Burned Out To Try</title>
+  <meta name="description" content="A gentle space for ADHD moms who are running low. Calm, kind guidance with no judgment." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;1,400&family=Nunito:wght@300;400;500;600&display=swap" rel="stylesheet" />
+
+  <style>
+    :root {
+      --bg:           #fdf6ed;
+      --bg-deep:      #f9efe0;
+      --surface:      #fffcf7;
+      --surface-alt:  #fef8f0;
+      --border:       #e8d5bc;
+      --border-acc:   #d4a87a;
+      --amber:        #c97d45;
+      --amber-light:  #e8a87c;
+      --amber-pale:   #fdf0e4;
+      --rose:         #c4706a;
+      --rose-light:   #e8b4ae;
+      --rose-pale:    #fdf0ef;
+      --sage:         #6b9e7a;
+      --sage-light:   #a8c8b0;
+      --sage-pale:    #eef5f0;
+      --gold:         #b8924a;
+      --gold-light:   #d4b47a;
+      --gold-pale:    #fdf4e4;
+      --text-dark:    #3d2e1e;
+      --text-mid:     #7a5c3e;
+      --text-soft:    #a88a6e;
+      --text-ghost:   #c4aa8e;
+      --shadow:       rgba(61,46,30,0.08);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Nunito', sans-serif;
+      background: linear-gradient(170deg, var(--bg) 0%, var(--bg-deep) 40%, #f5ead6 100%);
+      background-attachment: fixed;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 0 16px 100px;
+      position: relative;
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 0;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='0.025'/%3E%3C/svg%3E");
+    }
+
+    body::after {
+      content: '';
+      position: fixed;
+      top: -200px; right: -100px;
+      width: 600px; height: 600px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(232,168,124,0.16) 0%, transparent 65%);
+      filter: blur(80px);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .orb-bottom {
+      position: fixed;
+      bottom: 0; left: -150px;
+      width: 500px; height: 500px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(107,158,122,0.11) 0%, transparent 65%);
+      filter: blur(80px);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .page {
+      width: 100%;
+      max-width: 600px;
+      position: relative;
+      z-index: 1;
+      opacity: 0;
+      transform: translateY(24px);
+      animation: rise 0.9s ease 0.1s forwards;
+    }
+
+    @keyframes rise {
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ── HEADER ── */
+    header { text-align: center; padding: 56px 0 36px; }
+
+    .candle-icon {
+      display: inline-flex;
+      align-items: center; justify-content: center;
+      width: 62px; height: 62px; border-radius: 50%;
+      background: radial-gradient(circle, var(--amber-pale), #fdf8f2);
+      border: 1.5px solid var(--border-acc);
+      font-size: 28px; margin-bottom: 22px;
+      box-shadow: 0 0 0 8px rgba(201,125,69,0.06), 0 4px 20px rgba(201,125,69,0.15);
+    }
+
+    .eyebrow {
+      font-size: 11px; letter-spacing: 0.24em;
+      text-transform: uppercase; color: var(--amber);
+      font-weight: 600; margin-bottom: 14px;
+    }
+
+    h1 {
+      font-family: 'Lora', serif;
+      font-size: clamp(30px, 8vw, 48px);
+      font-weight: 400; line-height: 1.1;
+      color: var(--text-dark); letter-spacing: -0.02em;
+    }
+
+    h1 .gradient-text {
+      font-style: italic;
+      background: linear-gradient(135deg, var(--amber) 0%, var(--rose) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .subtitle {
+      margin: 16px auto 0;
+      font-size: 15.5px; font-weight: 300;
+      color: var(--text-mid); line-height: 1.7;
+      max-width: 360px; letter-spacing: 0.01em;
+    }
+
+    .ornament {
+      display: flex; align-items: center;
+      justify-content: center; gap: 14px; margin-top: 28px;
+    }
+
+    .ornament-line { width: 48px; height: 1px; }
+    .ornament-line.left  { background: linear-gradient(90deg, transparent, var(--border)); }
+    .ornament-line.right { background: linear-gradient(90deg, var(--border), transparent); }
+    .ornament-dots { display: flex; gap: 5px; align-items: center; }
+    .dot-sm { width: 4px; height: 4px; border-radius: 50%; background: var(--amber-light); }
+    .dot-md { width: 6px; height: 6px; border-radius: 50%; background: var(--amber); margin-top: -1px; }
+
+    /* ── MOOD CHIPS ── */
+    .mood-strip {
+      display: flex; flex-wrap: wrap;
+      gap: 8px; justify-content: center; margin-bottom: 26px;
+    }
+
+    .mood-btn {
+      font-family: 'Nunito', sans-serif;
+      font-size: 13px; font-weight: 500;
+      padding: 9px 17px; border-radius: 30px;
+      border: 1.5px solid var(--border);
+      background: var(--surface); color: var(--text-mid);
+      cursor: pointer; transition: all 0.2s ease;
+      letter-spacing: 0.01em;
+      box-shadow: 0 1px 4px var(--shadow);
+    }
+
+    .mood-btn:hover, .mood-btn.active {
+      border-color: var(--amber);
+      background: linear-gradient(135deg, var(--amber-pale), #fef5ec);
+      color: var(--amber);
+      box-shadow: 0 2px 16px rgba(201,125,69,0.2), 0 0 0 3px rgba(201,125,69,0.08);
+    }
+
+    /* ── INPUT CARD ── */
+    .input-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 24px; padding: 32px;
+      box-shadow: 0 4px 40px var(--shadow), inset 0 1px 0 rgba(255,255,255,0.8);
+      position: relative; overflow: hidden;
+    }
+
+    .input-card::before {
+      content: '';
+      position: absolute; top: 0; left: 15%; right: 15%; height: 1px;
+      background: linear-gradient(90deg, transparent, var(--border-acc), transparent);
+      opacity: 0.5;
+    }
+
+    .input-card::after {
+      content: '';
+      position: absolute; top: 0; right: 0;
+      width: 120px; height: 120px;
+      background: radial-gradient(circle at top right, rgba(201,125,69,0.07), transparent 70%);
+      pointer-events: none;
+    }
+
+    .card-label {
+      font-family: 'Lora', serif;
+      font-size: 20px; font-weight: 400;
+      color: var(--text-dark); margin-bottom: 6px;
+      line-height: 1.3; letter-spacing: -0.01em; display: block;
+    }
+
+    .card-sublabel {
+      font-size: 13.5px; font-weight: 300;
+      color: var(--text-soft); margin-bottom: 18px; line-height: 1.55;
+    }
+
+    textarea {
+      width: 100%; padding: 16px 18px;
+      border: 1.5px solid var(--border); border-radius: 16px;
+      background: var(--bg);
+      font-family: 'Nunito', sans-serif;
+      font-size: 15px; font-weight: 300; color: var(--text-dark);
+      line-height: 1.7; outline: none; resize: none;
+      transition: border-color 0.25s, box-shadow 0.25s;
+      caret-color: var(--amber); min-height: 110px;
+    }
+
+    textarea::placeholder { color: var(--text-ghost); font-style: italic; }
+    textarea:focus {
+      border-color: var(--border-acc);
+      box-shadow: 0 0 0 4px rgba(201,125,69,0.1);
+    }
+
+    .btn-row {
+      display: flex; align-items: center;
+      justify-content: space-between;
+      margin-top: 18px; gap: 12px; flex-wrap: wrap;
+    }
+
+    .privacy-note {
+      font-size: 12px; color: var(--text-ghost);
+      font-weight: 300; letter-spacing: 0.01em;
+    }
+
+    .submit-btn {
+      font-family: 'Nunito', sans-serif;
+      font-size: 14.5px; font-weight: 600;
+      color: #fffcf7;
+      background: linear-gradient(135deg, var(--amber) 0%, var(--rose) 100%);
+      border: none; border-radius: 40px; padding: 13px 30px;
+      cursor: pointer;
+      box-shadow: 0 4px 20px rgba(201,125,69,0.35), inset 0 1px 0 rgba(255,255,255,0.2);
+      transition: all 0.25s ease;
+      white-space: nowrap; letter-spacing: 0.02em;
+    }
+
+    .submit-btn:hover:not(:disabled) {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 28px rgba(201,125,69,0.45), inset 0 1px 0 rgba(255,255,255,0.2);
+    }
+
+    .submit-btn:active:not(:disabled) { transform: translateY(0); }
+
+    .submit-btn:disabled {
+      background: var(--surface-alt);
+      color: var(--text-soft);
+      border: 1.5px solid var(--border);
+      box-shadow: none; cursor: not-allowed;
+    }
+
+    /* ── LOADING ── */
+    .loading { display: none; text-align: center; padding: 24px 0 6px; }
+    .loading.show { display: block; }
+
+    .loading-dots { display: flex; justify-content: center; gap: 10px; margin-bottom: 12px; }
+
+    .loading-dots span {
+      width: 9px; height: 9px; border-radius: 50%;
+      background: linear-gradient(135deg, var(--amber-light), var(--amber));
+      animation: breathe 1.6s ease-in-out infinite;
+      box-shadow: 0 2px 8px rgba(201,125,69,0.4);
+    }
+
+    .loading-dots span:nth-child(2) { animation-delay: 0.25s; }
+    .loading-dots span:nth-child(3) { animation-delay: 0.5s; }
+
+    @keyframes breathe {
+      0%, 100% { transform: scale(0.55); opacity: 0.3; }
+      50%       { transform: scale(1.15); opacity: 1; }
+    }
+
+    .loading-text {
+      font-family: 'Lora', serif; font-size: 14px;
+      color: var(--text-soft); font-style: italic; letter-spacing: 0.02em;
+    }
+
+    /* ── ERROR ── */
+    .error-banner {
+      display: none; margin-top: 16px;
+      background: var(--rose-pale); border: 1px solid var(--rose-light);
+      border-radius: 14px; padding: 14px 18px;
+      font-size: 14px; color: var(--rose); line-height: 1.65;
+    }
+    .error-banner.show { display: block; }
+
+    /* ── RESPONSE ── */
+    #response-area {
+      display: none; margin-top: 30px;
+      opacity: 0; transform: translateY(16px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+    #response-area.visible { display: block; }
+    #response-area.shown   { opacity: 1; transform: translateY(0); }
+
+    .crisis-banner {
+      display: none;
+      background: #fffbec; border: 1px solid #e8d48a;
+      border-radius: 16px; padding: 16px 20px; margin-bottom: 20px;
+      font-size: 14px; color: #8a6820; line-height: 1.7;
+    }
+    .crisis-banner.show { display: block; }
+
+    /* ── RESPONSE CARD ── */
+    .response-card {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 24px; overflow: hidden;
+      box-shadow: 0 8px 50px rgba(61,46,30,0.1), inset 0 1px 0 rgba(255,255,255,0.9);
+      position: relative;
+    }
+
+    .response-top-bar {
+      height: 4px;
+      background: linear-gradient(90deg, var(--rose), var(--amber), var(--gold), var(--sage));
+      box-shadow: 0 2px 12px rgba(201,125,69,0.3);
+    }
+
+    .response-inner-glow {
+      position: absolute; top: 4px; left: 0; right: 0; height: 180px;
+      background: radial-gradient(ellipse at 50% 0%, rgba(201,125,69,0.04), transparent 70%);
+      pointer-events: none;
+    }
+
+    .response-body { padding: 30px 30px 26px; position: relative; }
+
+    .resp-section {
+      margin-bottom: 26px; padding-bottom: 24px;
+      border-bottom: 1px solid var(--border);
+    }
+    .resp-section:last-child { margin-bottom: 0; padding-bottom: 0; border-bottom: none; }
+
+    .resp-label {
+      font-size: 10px; font-weight: 700;
+      letter-spacing: 0.22em; text-transform: uppercase;
+      margin-bottom: 10px;
+      display: flex; align-items: center; gap: 8px;
+    }
+
+    .resp-label-line { width: 16px; height: 1.5px; display: inline-block; }
+
+    .label-rose { color: var(--rose); }
+    .label-sage { color: var(--sage); }
+    .label-gold { color: var(--gold); }
+    .line-rose  { background: var(--rose-light); }
+    .line-sage  { background: var(--sage-light); }
+    .line-gold  { background: var(--gold-light); }
+
+    .validation-text {
+      font-family: 'Lora', serif; font-size: 19px;
+      font-weight: 400; font-style: italic;
+      color: var(--text-dark); line-height: 1.65; letter-spacing: 0.01em;
+    }
+
+    .lens-text {
+      font-size: 15px; font-weight: 300;
+      color: var(--text-mid); line-height: 1.8;
+    }
+
+    .guidance-list { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+
+    .guidance-item {
+      display: flex; gap: 14px; align-items: flex-start;
+      border-radius: 14px; padding: 14px 16px;
+      font-size: 14.5px; font-weight: 300; color: var(--text-dark);
+      line-height: 1.65; position: relative; overflow: hidden;
+    }
+
+    .guidance-item.regular  { background: var(--amber-pale); border: 1px solid var(--amber-light); }
+    .guidance-item.zero-effort { background: var(--sage-pale); border: 1px solid var(--sage-light); }
+
+    .guidance-stripe {
+      position: absolute; left: 0; top: 0; bottom: 0;
+      width: 3px; border-radius: 3px 0 0 3px; opacity: 0.6;
+    }
+    .stripe-amber { background: var(--amber); }
+    .stripe-sage  { background: var(--sage); }
+
+    .guidance-dot { width: 7px; height: 7px; border-radius: 50%; margin-top: 7px; flex-shrink: 0; }
+    .dot-amber { background: var(--amber); box-shadow: 0 0 10px rgba(201,125,69,0.5); }
+    .dot-sage  { background: var(--sage);  box-shadow: 0 0 10px rgba(107,158,122,0.5); }
+
+    .zero-badge {
+      margin-left: auto; flex-shrink: 0; align-self: center;
+      font-size: 10px; font-weight: 700; letter-spacing: 0.14em;
+      text-transform: uppercase; color: var(--sage);
+      background: rgba(107,158,122,0.15); border: 1px solid var(--sage-light);
+      border-radius: 20px; padding: 3px 10px; white-space: nowrap;
+    }
+
+    .permission-box {
+      background: linear-gradient(135deg, var(--gold-pale), #fefaf4);
+      border: 1px solid var(--gold-light); border-radius: 18px;
+      padding: 20px 22px; position: relative; overflow: hidden;
+      box-shadow: 0 2px 16px rgba(184,146,74,0.1);
+    }
+
+    .permission-bar {
+      position: absolute; left: 0; top: 0; bottom: 0; width: 4px;
+      background: linear-gradient(180deg, var(--amber), var(--gold));
+      border-radius: 4px 0 0 4px;
+    }
+
+    .permission-corner {
+      position: absolute; bottom: -10px; right: -10px;
+      width: 60px; height: 60px; border-radius: 50%;
+      background: radial-gradient(circle, rgba(201,125,69,0.08), transparent 70%);
+    }
+
+    .permission-text {
+      font-size: 15.5px; font-weight: 300; color: var(--text-dark);
+      line-height: 1.78; padding-left: 6px; letter-spacing: 0.01em;
+    }
+
+    /* ── TRY AGAIN ── */
+    .try-again-row { text-align: center; margin-top: 22px; }
+
+    .try-again-btn {
+      font-family: 'Nunito', sans-serif;
+      font-size: 13.5px; font-weight: 500; color: var(--text-soft);
+      background: transparent; border: 1.5px solid var(--border);
+      border-radius: 30px; padding: 10px 26px; cursor: pointer;
+      letter-spacing: 0.02em; transition: all 0.2s;
+    }
+
+    .try-again-btn:hover {
+      border-color: var(--border-acc); color: var(--amber); background: var(--amber-pale);
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      margin-top: 52px; text-align: center;
+      font-size: 12.5px; color: var(--text-ghost);
+      font-weight: 300; line-height: 1.9; letter-spacing: 0.01em;
+    }
+
+    .footer-divider {
+      display: flex; align-items: center;
+      justify-content: center; gap: 10px; margin-bottom: 12px;
+    }
+
+    .footer-line { width: 28px; height: 1px; background: var(--border); }
+
+    @media (max-width: 480px) {
+      .input-card, .response-body { padding: 22px 18px; }
+      .btn-row { flex-direction: column; align-items: stretch; }
+      .submit-btn { text-align: center; }
+    }
+    /* ── PASSCODE SCREEN ── */
+    #passcode-screen {
+      position: fixed; inset: 0; z-index: 999;
+      background: linear-gradient(170deg, var(--bg) 0%, var(--bg-deep) 40%, #f5ead6 100%);
+      display: flex; align-items: center; justify-content: center;
+      padding: 24px;
+    }
+    .passcode-card {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 24px; padding: 40px 36px;
+      width: 100%; max-width: 400px; text-align: center;
+      box-shadow: 0 8px 50px rgba(61,46,30,0.1), inset 0 1px 0 rgba(255,255,255,0.9);
+      position: relative; overflow: hidden;
+    }
+    .passcode-card::before {
+      content: ""; position: absolute; top: 0; left: 0; right: 0; height: 4px;
+      background: linear-gradient(90deg, var(--rose), var(--amber), var(--gold), var(--sage));
+    }
+    .passcode-icon {
+      display: inline-flex; align-items: center; justify-content: center;
+      width: 58px; height: 58px; border-radius: 50%;
+      background: radial-gradient(circle, var(--amber-pale), #fdf8f2);
+      border: 1.5px solid var(--border-acc); font-size: 26px; margin-bottom: 20px;
+      box-shadow: 0 0 0 8px rgba(201,125,69,0.06), 0 4px 20px rgba(201,125,69,0.15);
+    }
+    .passcode-title {
+      font-family: 'Lora', serif; font-size: 22px; font-weight: 400;
+      color: var(--text-dark); margin-bottom: 8px; letter-spacing: -0.01em;
+    }
+    .passcode-subtitle {
+      font-size: 14px; font-weight: 300; color: var(--text-soft);
+      line-height: 1.6; margin-bottom: 28px;
+    }
+    .passcode-input {
+      width: 100%; padding: 14px 18px; border: 1.5px solid var(--border);
+      border-radius: 14px; background: var(--bg);
+      font-family: 'Nunito', sans-serif; font-size: 22px; font-weight: 600;
+      color: var(--text-dark); text-align: center; letter-spacing: 0.22em;
+      outline: none; transition: border-color 0.25s, box-shadow 0.25s;
+      caret-color: var(--amber); margin-bottom: 16px;
+    }
+    .passcode-input::placeholder { color: var(--text-ghost); font-weight: 300; letter-spacing: 0.05em; font-size: 15px; }
+    .passcode-input:focus { border-color: var(--border-acc); box-shadow: 0 0 0 4px rgba(201,125,69,0.1); }
+    .passcode-input.shake { animation: shake 0.4s ease; border-color: var(--rose-light); }
+    @keyframes shake {
+      0%, 100% { transform: translateX(0); } 20% { transform: translateX(-8px); }
+      40% { transform: translateX(8px); } 60% { transform: translateX(-6px); } 80% { transform: translateX(6px); }
+    }
+    .passcode-btn {
+      width: 100%; font-family: 'Nunito', sans-serif;
+      font-size: 15px; font-weight: 600; color: #fffcf7;
+      background: linear-gradient(135deg, var(--amber) 0%, var(--rose) 100%);
+      border: none; border-radius: 40px; padding: 14px 30px; cursor: pointer;
+      box-shadow: 0 4px 20px rgba(201,125,69,0.35), inset 0 1px 0 rgba(255,255,255,0.2);
+      transition: all 0.25s ease; letter-spacing: 0.02em;
+    }
+    .passcode-btn:hover { transform: translateY(-2px); }
+    .passcode-error { margin-top: 14px; font-size: 13.5px; color: var(--rose); min-height: 20px; }
+    .passcode-note { margin-top: 20px; font-size: 12px; color: var(--text-ghost); font-weight: 300; line-height: 1.7; }
+  </style>
+</head>
+<body>
+
+  <!-- PASSCODE SCREEN -->
+  <div id="passcode-screen">
+    <div class="passcode-card">
+      <div class="passcode-icon">🔐</div>
+      <h2 class="passcode-title">Too Burned Out To Try</h2>
+      <p class="passcode-subtitle">Enter your access code to unlock your app</p>
+      <input class="passcode-input" id="passcode-input" type="password" placeholder="Enter code" maxlength="20" />
+      <button class="passcode-btn" id="passcode-btn">Unlock my app</button>
+      <p class="passcode-error" id="passcode-error"></p>
+      <p class="passcode-note">Got this app as part of a bundle?<br>Your access code is in your purchase email.</p>
+    </div>
+  </div>
+
+  <div class="orb-bottom"></div>
+
+  <div class="page">
+
+    <header>
+      <div class="candle-icon">🕯️</div>
+      <p class="eyebrow">Built for the mom who's running on empty</p>
+      <h1>Too <span class="gradient-text">Burned Out</span><br>To Try</h1>
+      <p class="subtitle">
+        Type what's going on right now. Get calm, kind guidance —
+        through an ADHD lens. No judgment, no overwhelm.
+      </p>
+      <div class="ornament">
+        <div class="ornament-line left"></div>
+        <div class="ornament-dots">
+          <div class="dot-sm"></div>
+          <div class="dot-md"></div>
+          <div class="dot-sm"></div>
+        </div>
+        <div class="ornament-line right"></div>
+      </div>
+    </header>
+
+    <div class="mood-strip" id="mood-strip">
+      <button class="mood-btn" data-text="I'm completely overwhelmed and don't know where to start">🌊 Overwhelmed</button>
+      <button class="mood-btn" data-text="I feel like I'm failing as a mom">💔 Mom guilt</button>
+      <button class="mood-btn" data-text="I can't get myself to do basic tasks around the house">🧱 Can't function</button>
+      <button class="mood-btn" data-text="I'm so exhausted I can't think straight">😮‍💨 Exhausted</button>
+      <button class="mood-btn" data-text="I don't know who I am anymore outside of being a mom">🪞 Lost myself</button>
+      <button class="mood-btn" data-text="My emotions feel out of control today">🌀 Emotional spiral</button>
+    </div>
+
+    <div class="input-card">
+      <label class="card-label" for="user-input">What's going on right now?</label>
+      <p class="card-sublabel">You don't have to explain it perfectly.</p>
+
+      <textarea
+        id="user-input"
+        placeholder="I haven't done the dishes in three days and I hate myself for it…"
+        maxlength="800"
+        rows="4"
+      ></textarea>
+
+      <div class="btn-row">
+        <span class="privacy-note">Private. Safe. Just you.</span>
+        <button class="submit-btn" id="submit-btn" type="button">
+          Help me through this
+        </button>
+      </div>
+
+      <div class="loading" id="loading">
+        <div class="loading-dots"><span></span><span></span><span></span></div>
+        <p class="loading-text">Finding the right words for you…</p>
+      </div>
+    </div>
+
+    <div class="error-banner" id="error-banner"></div>
+
+    <div id="response-area" aria-live="polite">
+
+      <div class="crisis-banner" id="crisis-banner">
+        💛 You're not alone in this. If things feel really dark right now —
+        <strong>Crisis Text Line:</strong> text HOME to <strong>741741</strong>. Free, confidential, 24/7.
+      </div>
+
+      <div class="response-card">
+        <div class="response-top-bar"></div>
+        <div class="response-inner-glow"></div>
+        <div class="response-body">
+
+          <div class="resp-section">
+            <div class="resp-label label-rose">
+              <span class="resp-label-line line-rose"></span>
+              We see you
+              <span class="resp-label-line line-rose"></span>
+            </div>
+            <p class="validation-text" id="resp-validation"></p>
+          </div>
+
+          <div class="resp-section">
+            <div class="resp-label label-sage">
+              <span class="resp-label-line line-sage"></span>
+              Here's what's happening in your brain
+              <span class="resp-label-line line-sage"></span>
+            </div>
+            <p class="lens-text" id="resp-lens"></p>
+          </div>
+
+          <div class="resp-section">
+            <div class="resp-label label-gold">
+              <span class="resp-label-line line-gold"></span>
+              Try one of these. Or don't.
+              <span class="resp-label-line line-gold"></span>
+            </div>
+            <ul class="guidance-list" id="resp-guidance"></ul>
+          </div>
+
+          <div class="resp-section">
+            <div class="resp-label label-gold">
+              <span class="resp-label-line line-gold"></span>
+              You're allowed to
+              <span class="resp-label-line line-gold"></span>
+            </div>
+            <div class="permission-box">
+              <div class="permission-bar"></div>
+              <div class="permission-corner"></div>
+              <p class="permission-text" id="resp-permission"></p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <div class="try-again-row">
+        <button class="try-again-btn" id="try-again-btn">← I need to ask something else</button>
+      </div>
+
+    </div>
+
+    <footer>
+      <div class="footer-divider">
+        <div class="footer-line"></div>
+        <span style="font-size:14px;opacity:0.7">🕯️</span>
+        <div class="footer-line"></div>
+      </div>
+      <strong style="color:#7a5c3e;font-weight:500">Too Burned Out To Try</strong>
+      — made with care for ADHD moms 🌿<br>
+      Not a therapist · Not a diagnosis · Just a calm corner when you need it<br>
+      <span>Crisis support · Text HOME to 741741</span>
+    </footer>
+
+  </div>
+
+  <script>
+    const CRISIS_PHRASES = [
+      "hate my life","want to disappear","don't want to be here",
+      "failing my kids","not worth it","end it","hurt myself",
+      "can't do this anymore","nobody cares","better off without me",
+      "want to die","kill myself"
+    ];
+
+    function isCrisis(text) {
+      return CRISIS_PHRASES.some(p => text.toLowerCase().includes(p));
+    }
+
+    const textarea     = document.getElementById('user-input');
+    const submitBtn    = document.getElementById('submit-btn');
+    const loadingEl    = document.getElementById('loading');
+    const errorEl      = document.getElementById('error-banner');
+    const responseArea = document.getElementById('response-area');
+    const crisisBanner = document.getElementById('crisis-banner');
+    const tryAgainBtn  = document.getElementById('try-again-btn');
+    const respValidation = document.getElementById('resp-validation');
+    const respLens       = document.getElementById('resp-lens');
+    const respGuidance   = document.getElementById('resp-guidance');
+    const respPermission = document.getElementById('resp-permission');
+
+    // Mood chips
+    document.getElementById('mood-strip').addEventListener('click', e => {
+      const btn = e.target.closest('.mood-btn');
+      if (!btn) return;
+      document.querySelectorAll('.mood-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      textarea.value = btn.dataset.text;
+      textarea.focus();
+    });
+
+    // Submit
+    submitBtn.addEventListener('click', handleSubmit);
+    textarea.addEventListener('keydown', e => {
+      if ((e.metaKey || e.ctrlKey) && e.key === 'Enter') handleSubmit();
+    });
+
+    async function handleSubmit() {
+      const text = textarea.value.trim();
+      if (!text) {
+        textarea.style.borderColor = 'var(--rose-light)';
+        textarea.focus();
+        setTimeout(() => { textarea.style.borderColor = ''; }, 1500);
+        return;
+      }
+
+      showError('');
+      hideResponse();
+      setLoading(true);
+
+      try {
+        // Calls /api/chat → Vercel function → Gemini AI
+        const res = await fetch('/api/chat', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ message: text })
+        });
+
+        if (!res.ok) {
+          const err = await res.json().catch(() => ({}));
+          throw { status: res.status, message: err.error || '' };
+        }
+
+        const data = await res.json();
+        renderResponse(data, isCrisis(text) || !!data.crisis);
+
+      } catch (err) {
+        console.error('Error:', err);
+        handleError(err);
+      } finally {
+        setLoading(false);
+      }
+    }
+
+    function renderResponse(data, crisisFlag) {
+      respValidation.textContent = data.validation || '';
+      respLens.textContent       = data.lens || '';
+      respPermission.textContent = data.permission || '';
+
+      respGuidance.innerHTML = '';
+      const items = Array.isArray(data.guidance) ? data.guidance : [];
+      items.forEach((item, i) => {
+        const isLast = i === items.length - 1;
+        const li = document.createElement('li');
+        li.className = `guidance-item ${isLast ? 'zero-effort' : 'regular'}`;
+        li.innerHTML = `
+          <div class="guidance-stripe ${isLast ? 'stripe-sage' : 'stripe-amber'}"></div>
+          <div class="guidance-dot ${isLast ? 'dot-sage' : 'dot-amber'}"></div>
+          <span>${item}</span>
+          ${isLast ? '<span class="zero-badge">zero effort</span>' : ''}
+        `;
+        respGuidance.appendChild(li);
+      });
+
+      crisisBanner.classList.toggle('show', crisisFlag);
+      responseArea.style.display = 'block';
+      responseArea.offsetHeight;
+      responseArea.classList.add('visible');
+      setTimeout(() => responseArea.classList.add('shown'), 20);
+      setTimeout(() => responseArea.scrollIntoView({ behavior: 'smooth', block: 'start' }), 150);
+    }
+
+    function hideResponse() {
+      responseArea.classList.remove('shown', 'visible');
+      responseArea.style.display = 'none';
+      crisisBanner.classList.remove('show');
+    }
+
+    tryAgainBtn.addEventListener('click', () => {
+      hideResponse();
+      textarea.value = '';
+      showError('');
+      document.querySelectorAll('.mood-btn').forEach(b => b.classList.remove('active'));
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+
+    function handleError(err) {
+      let msg = 'Something didn\'t connect. Take a breath and try again in a moment. 🌿';
+      if (err.status === 429) msg = 'Daily limit reached. Please try again tomorrow.';
+      if (err.status === 500) msg = 'The server had a hiccup. Try again shortly.';
+      if (!navigator.onLine)  msg = 'No internet connection. Check your connection and try again.';
+      showError(msg);
+    }
+
+    function showError(msg) {
+      if (!msg) { errorEl.classList.remove('show'); errorEl.textContent = ''; return; }
+      errorEl.textContent = msg;
+      errorEl.classList.add('show');
+    }
+
+    function setLoading(on) {
+      submitBtn.disabled = on;
+      submitBtn.textContent = on ? 'One moment…' : 'Help me through this';
+      loadingEl.classList.toggle('show', on);
+    }
+    // ── PASSCODE LOGIC ──────────────────────────────────────
+    const PASSCODE = "772073";
+    const STORAGE_KEY = "tbott_unlocked";
+
+    const passcodeScreen = document.getElementById("passcode-screen");
+    const passcodeInput  = document.getElementById("passcode-input");
+    const passcodeBtn    = document.getElementById("passcode-btn");
+    const passcodeError  = document.getElementById("passcode-error");
+
+    // Check if already unlocked in this browser
+    function checkUnlocked() {
+      if (localStorage.getItem(STORAGE_KEY) === "yes") {
+        passcodeScreen.style.display = "none";
+      }
+    }
+
+    function tryUnlock() {
+      const entered = passcodeInput.value.trim();
+      if (entered === PASSCODE) {
+        localStorage.setItem(STORAGE_KEY, "yes");
+        passcodeScreen.style.opacity = "0";
+        passcodeScreen.style.transition = "opacity 0.5s ease";
+        setTimeout(() => { passcodeScreen.style.display = "none"; }, 500);
+      } else {
+        passcodeError.textContent = "That code is not quite right. Check your purchase email.";
+        passcodeInput.classList.add("shake");
+        passcodeInput.value = "";
+        setTimeout(() => passcodeInput.classList.remove("shake"), 500);
+      }
+    }
+
+    passcodeBtn.addEventListener("click", tryUnlock);
+    passcodeInput.addEventListener("keydown", e => { if (e.key === "Enter") tryUnlock(); });
+
+    // Run check on page load
+    checkUnlocked();
+
+  </script>
+</body>
+</html>
